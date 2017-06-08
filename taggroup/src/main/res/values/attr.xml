@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TagGroup">
+        <attr name="tgp_vertical_spacing" format="dimension" />
+        <attr name="tgp_horizontal_spacing" format="dimension" />
+        <attr name="tgp_max_row" format="integer" />
+    </declare-styleable>
+</resources>
