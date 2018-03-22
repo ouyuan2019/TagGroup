@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Sample.iml" filepath="$PROJECT_DIR$/Sample.iml" />
+      <module fileurl="file://D:\github\Sample.iml" filepath="D:\github\Sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\github\app\app.iml" filepath="D:\github\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/github.iml" filepath="$PROJECT_DIR$/github.iml" />
       <module fileurl="file://$PROJECT_DIR$/taggroup/taggroup.iml" filepath="$PROJECT_DIR$/taggroup/taggroup.iml" />
+      <module fileurl="file://D:\github\taggroup\taggroup.iml" filepath="D:\github\taggroup\taggroup.iml" />
     </modules>
   </component>
 </project>

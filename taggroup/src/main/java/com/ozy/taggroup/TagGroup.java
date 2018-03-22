@@ -32,6 +32,9 @@ public class TagGroup extends ViewGroup {
     private List tags = new ArrayList();
 
 
+    private int itemLayoutId = 0;
+
+
     public TagGroup(Context context) {
         this(context, null);
     }
@@ -48,6 +51,7 @@ public class TagGroup extends ViewGroup {
         mMaxRow = a.getInt(R.styleable.TagGroup_tgp_max_row, 10);
         a.recycle();
         this.mContext = context;
+        itemLayoutId = R.layout.item_tag;
     }
 
     @Override
@@ -126,7 +130,6 @@ public class TagGroup extends ViewGroup {
                 rowWidth += childWidth + mHorizontalSpacing; //每个字控件的宽度
                 //子控件的宽度大于父控件换行
                 if (rowWidth > widthSize) {
-
                     rowWidth = childWidth;
                     height += rowMaxHeight + mVerticalSpacing;
                     rowMaxHeight = childHeight;
@@ -166,6 +169,21 @@ public class TagGroup extends ViewGroup {
         }
     }
 
+    public TagGroup setData(List tags) {
+        this.tags = tags;
+        return this;
+    }
+
+    public void show() {
+        removeAllViews();
+        for (int i = 0; i < tags.size(); i++) {
+            View view = LayoutInflater.from(mContext).inflate(itemLayoutId, null, false);
+            TextView textView = (TextView) view.findViewById(R.id.tag);
+            textView.setText(tags.get(i).toString());
+            addView(view);
+        }
+    }
+
     public List getList() {
         return tags;
     }
@@ -189,8 +207,8 @@ public class TagGroup extends ViewGroup {
     public void setTagViewFactory(TagViewFactory tagView) {
         this.mTagViewFactory = tagView;
     }
-    private TagViewFactory mTagViewFactory;
 
+    private TagViewFactory mTagViewFactory;
 
 
     public interface TagViewFactory {
@@ -198,8 +216,8 @@ public class TagGroup extends ViewGroup {
     }
 
 
-    public interface OnTagItemClickListener<T> {
-        void onClick(View view, int position, T tag);
+    public interface OnTagItemClickListener {
+        void onClick(View view, int position, Object tag);
     }
 
 
