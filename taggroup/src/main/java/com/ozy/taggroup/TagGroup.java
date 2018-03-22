@@ -177,9 +177,19 @@ public class TagGroup extends ViewGroup {
     public void show() {
         removeAllViews();
         for (int i = 0; i < tags.size(); i++) {
-            View view = LayoutInflater.from(mContext).inflate(itemLayoutId, null, false);
+            final View view = LayoutInflater.from(mContext).inflate(itemLayoutId, null, false);
             TextView textView = (TextView) view.findViewById(R.id.tag);
             textView.setText(tags.get(i).toString());
+
+            final int finalI = i;
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onTagItemClickListener != null) {
+                        onTagItemClickListener.onClick(view, finalI, tags.get(finalI));
+                    }
+                }
+            });
             addView(view);
         }
     }
@@ -221,4 +231,9 @@ public class TagGroup extends ViewGroup {
     }
 
 
+    private OnTagItemClickListener onTagItemClickListener;
+
+    public void setOnTagItemClickListener(OnTagItemClickListener onTagItemClickListener) {
+        this.onTagItemClickListener = onTagItemClickListener;
+    }
 }
