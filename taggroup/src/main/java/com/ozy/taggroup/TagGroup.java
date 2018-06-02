@@ -27,8 +27,6 @@ public class TagGroup extends ViewGroup {
 
     private int mMaxRow = 10;
 
-    private View mTagView;
-
     private List tags = new ArrayList();
 
 
@@ -49,9 +47,9 @@ public class TagGroup extends ViewGroup {
         mVerticalSpacing = a.getDimension(R.styleable.TagGroup_tgp_vertical_spacing, 10);
         mHorizontalSpacing = a.getDimension(R.styleable.TagGroup_tgp_horizontal_spacing, 10);
         mMaxRow = a.getInt(R.styleable.TagGroup_tgp_max_row, 10);
+        itemLayoutId = a.getResourceId(R.styleable.TagGroup_tgp_item_layout, itemLayoutId);
         a.recycle();
         this.mContext = context;
-        itemLayoutId = R.layout.item_tag;
     }
 
     @Override
@@ -157,18 +155,6 @@ public class TagGroup extends ViewGroup {
     }
 
 
-    public void setList(List tags) {
-        this.tags = tags;
-        removeAllViews();
-        if (mTagViewFactory == null) {
-            throw new NullPointerException("please create TagViewFactory !!!");
-        }
-        for (int i = 0; i < tags.size(); i++) {
-            View view = mTagViewFactory.create(this, i, tags.get(i));
-            addView(view);
-        }
-    }
-
     public TagGroup setData(List tags) {
         this.tags = tags;
         return this;
@@ -205,8 +191,10 @@ public class TagGroup extends ViewGroup {
             if (i == position) {
                 view.setFocusable(true);
                 view.setFocusableInTouchMode(true);
+                view.setSelected(true);
                 view.requestFocus();
             } else {
+                view.setSelected(false);
                 view.setFocusable(false);
                 view.setFocusableInTouchMode(false);
                 view.clearFocus();
@@ -214,20 +202,11 @@ public class TagGroup extends ViewGroup {
         }
     }
 
-    public void setTagViewFactory(TagViewFactory tagView) {
-        this.mTagViewFactory = tagView;
-    }
-
-    private TagViewFactory mTagViewFactory;
 
 
-    public interface TagViewFactory {
-        View create(ViewGroup group, int position, Object tag);
-    }
 
-
-    public interface OnTagItemClickListener {
-        void onClick(View view, int position, Object tag);
+    public interface OnTagItemClickListener<T> {
+        void onClick(View view, int position, T tag);
     }
 
 
@@ -236,4 +215,6 @@ public class TagGroup extends ViewGroup {
     public void setOnTagItemClickListener(OnTagItemClickListener onTagItemClickListener) {
         this.onTagItemClickListener = onTagItemClickListener;
     }
+
+
 }
