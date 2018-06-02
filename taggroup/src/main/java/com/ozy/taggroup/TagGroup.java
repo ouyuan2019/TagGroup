@@ -47,7 +47,7 @@ public class TagGroup extends ViewGroup {
         mVerticalSpacing = a.getDimension(R.styleable.TagGroup_tgp_vertical_spacing, 10);
         mHorizontalSpacing = a.getDimension(R.styleable.TagGroup_tgp_horizontal_spacing, 10);
         mMaxRow = a.getInt(R.styleable.TagGroup_tgp_max_row, 10);
-        itemLayoutId = a.getResourceId(R.styleable.TagGroup_tgp_item_layout, itemLayoutId);
+        itemLayoutId = a.getResourceId(R.styleable.TagGroup_tgp_item_layout, R.layout.item_tag);
         a.recycle();
         this.mContext = context;
     }
